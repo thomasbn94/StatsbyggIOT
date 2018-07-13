@@ -1,0 +1,12 @@
+{
+    "http_parameters": {
+        "device_types": "temperature",
+        "event_types": "temperature",
+        "label_filters": {
+            "sensor_id": "b6sfpsl7rihg0dm4uuf0"
+        }
+    },
+    "other_parameters": {
+        "max_temperature": 30
+    }
+}
