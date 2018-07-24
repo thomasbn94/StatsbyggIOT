@@ -32,7 +32,7 @@ class SB_Usecase_No1(object):
 
 
     def run(self):
-        print("Here I am: use-case no. 1")
+        print("Here I am: use-case no. 2")
 
         # Open up a connection and stream data from a DT cloud
         sse_client = SB_SSEClient()
@@ -44,7 +44,8 @@ class SB_Usecase_No1(object):
         producer_thread.start()
 
         #LOGIC GOES HERE
-
+        print(self.queue.get())
+        
         producer_thread.join()
         
 
@@ -56,6 +57,7 @@ class SB_Usecase_No1(object):
         while True:
             for event in client.events():
                 try:
+                    print(json.loads(event.data))
                     self.queue.put(json.loads(event.data))
                 except queue.Queue.Full as e:
                     print("Queue is full. Dropping events...")
@@ -72,7 +74,7 @@ class SB_Usecase_No1(object):
     def get_HTTP_parameters(self):
         # Load sensor data as HTTP parameters
         try:
-            json_config_file = open('sb_usecase_1_configuration.json', 'r')
+            json_config_file = open('sb_usecase_2_configuration.json', 'r')
             http_parameters = json.loads(json_config_file.read())["http_parameters"]
             json_config_file.close()
         except IOError:
