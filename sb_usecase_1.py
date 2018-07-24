@@ -43,40 +43,10 @@ class SB_Usecase_No1(object):
         producer_thread = threading.Thread(target=self.stream_data, args=(client, ))
         producer_thread.start()
 
-        # Read the maximum temperature from the config file
-        max_temp = self.get_max_temperature()
+        #LOGIC GOES HERE
 
-        # Perform use-case logic
-        self.surveil_temperature(max_temp)
         producer_thread.join()
         
-
-    ''' Checks temperature reading for illegal values '''
-    def surveil_temperature(self, max_temp):
-
-        ''' Use-case logic '''
-        while True:
-            data_point = None
-            try:
-                data_point = self.queue.get()
-                sensor_temp = data_point['result']['event']['data']['temperature']['value']
-                if sensor_temp > max_temp:
-                    self.send_notification(max_temp, sensor_temp, data_point)
-
-            except queue.Queue.Empty as e:
-                print("Queue is empty...")
-
-            ''' Break out of loop upon interrupt signal '''
-            if self.interrupted == True:
-                self.thread_kill = True
-                break
-
-
-    ''' Send a notification to notify an end-user '''
-    def send_notification(self, expected_temperature, actual_temperature, json_config):
-        timestamp = json_config['result']['event']['data']['temperature']['updateTime']
-        print("Too high temperature. Should be", expected_temperature,". Was", actual_temperature," at", timestamp)
-
 
 
     ''' Listen for live sensor data and insert them into a FIFO queue '''
@@ -95,20 +65,6 @@ class SB_Usecase_No1(object):
                 if self.thread_kill == True:
                     print("Thread killed")
                     return
-
-
-    ''' Returns the temperature used in this use-case '''
-    def get_max_temperature(self):
-        # Load temperature from config file
-        try:
-            json_config_file = open('sb_usecase_1_configuration.json', 'r')
-            max_temp = json.loads(json_config_file.read())["other_parameters"]["max_temperature"]
-            json_config_file.close()
-        except IOError:
-            print("Could not read or open config file. Exiting...")
-            sys.exit(1)
-        
-        return max_temp
 
 
 
