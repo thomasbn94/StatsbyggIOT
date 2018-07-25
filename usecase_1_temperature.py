@@ -15,7 +15,7 @@ import queue
 import signal
 
 
-class SB_Usecase_No1(object):
+class usecase_1_temperature(object):
     def __init__(self):
 
         # Get HTTP parameters 
@@ -101,7 +101,7 @@ class SB_Usecase_No1(object):
     def get_max_temperature(self):
         # Load temperature from config file
         try:
-            json_config_file = open('sb_usecase_1_configuration.json', 'r')
+            json_config_file = open('usecase_1_temperature.json', 'r')
             max_temp = json.loads(json_config_file.read())["other_parameters"]["max_temperature"]
             json_config_file.close()
         except IOError:
@@ -137,4 +137,4 @@ class SB_Usecase_No1(object):
 
 
 if __name__ == '__main__':
-    uc_1 = SB_Usecase_No1()
+    uc_1 = usecase_1_temperature()
