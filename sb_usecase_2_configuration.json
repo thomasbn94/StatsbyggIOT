@@ -1,12 +1,12 @@
 {
     "http_parameters": {
-        "device_types": "temperature",
-        "event_types": "temperature",
-        "label_filters": {
-            "sensor_id": "bakijfd7rihjn8rl24k0"
-        }
+        "device_types": "proximity",
+        "event_types": "objectPresent",
+        "device_ids": [
+            "bakijdl7rihjn8rl1jo0"
+        ]
     },
     "other_parameters": {
-        "max_temperature": 30
+        "max_open_duration": 10
     }
 }

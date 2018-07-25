@@ -13,7 +13,9 @@ import sys
 import threading
 import queue
 import signal
-
+import time
+import datetime
+import parser
 
 class SB_Usecase_No1(object):
     def __init__(self):
@@ -32,7 +34,6 @@ class SB_Usecase_No1(object):
 
 
     def run(self):
-        print("Here I am: use-case no. 2")
 
         # Open up a connection and stream data from a DT cloud
         sse_client = SB_SSEClient()
@@ -43,12 +44,63 @@ class SB_Usecase_No1(object):
         producer_thread = threading.Thread(target=self.stream_data, args=(client, ))
         producer_thread.start()
 
-        #LOGIC GOES HERE
-        print(self.queue.get())
-        
+        # Perform use-case logic
+        self.surveil_doorstate()
         producer_thread.join()
         
 
+    ''' Monitors state (open/closed) of a door (proximity sensor) '''
+    def surveil_doorstate(self):
+        
+        while True:
+            data_point = None
+            try:
+                data_point = self.queue.get()
+
+                #Get current state and timestamp from queue
+                state = data_point['result']['event']['data']['objectPresent']['state']
+                time_of_state_change = data_point['result']['event']['data']['objectPresent']['updateTime']
+
+                max_duration = self.max_open_duration()
+                if state == "PRESENT":
+                    print("Door closed at %s" % (time_of_state_change))
+                elif state == "NOT_PRESENT":
+                    timer = 0
+                    print("Door opened at %s" % (time_of_state_change))
+                    while state == "NOT_PRESENT" and self.queue.empty():
+                        timer += 1
+
+                        if timer > max_duration:
+                            alert = "ALERT: Door open since %s, alert issued at %s" %(time_of_state_change, datetime.datetime.utcnow())
+                            self.print_alert(alert)
+                            break
+
+                        time.sleep(1)
+
+            except queue.Queue.Empty as e:
+                print("Queue is empty...")
+
+            ''' Break out of loop upon interrupt signal '''
+            if self.interrupted == True:
+                self.thread_kill = True
+                break
+
+    ''' For future use (displaying alert externally) '''
+    def print_alert(self, alert):
+        print(alert)
+        
+    ''' Returns the max allowed duration for a door to remain open '''
+    def max_open_duration(self):
+        # Load duration limit for an open door from config file
+        try:
+            json_config_file = open('sb_usecase_2_configuration.json', 'r')
+            max_open_duration = json.loads(json_config_file.read())["other_parameters"]["max_open_duration"]
+            json_config_file.close()
+        except IOError:
+            print("Could not read or open config file. Exiting...")
+            sys.exit(1)
+        
+        return max_open_duration
 
     ''' Listen for live sensor data and insert them into a FIFO queue '''
     def stream_data(self, client):
@@ -57,7 +109,6 @@ class SB_Usecase_No1(object):
         while True:
             for event in client.events():
                 try:
-                    print(json.loads(event.data))
                     self.queue.put(json.loads(event.data))
                 except queue.Queue.Full as e:
                     print("Queue is full. Dropping events...")
@@ -67,6 +118,8 @@ class SB_Usecase_No1(object):
                 if self.thread_kill == True:
                     print("Thread killed")
                     return
+
+
 
 
 
