@@ -1,5 +1,6 @@
-''' Implements use-case no. 1. This use-case is about keeping track of 
-    the temperature of the VR3 computer case. 
+''' Implements use-case no. 2. This use-case is about keeping track of 
+    the duration a specific door has been open 
+    (proximity sensor in the "NOT-PRESENT" state) 
 '''
 
 from threading import Thread
