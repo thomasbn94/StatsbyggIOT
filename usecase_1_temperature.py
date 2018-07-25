@@ -101,7 +101,7 @@ class usecase_1_temperature(object):
     def get_max_temperature(self):
         # Load temperature from config file
         try:
-            json_config_file = open('usecase_1_temperature.json', 'r')
+            json_config_file = open('usecase_1_temperature_configuration.json', 'r')
             max_temp = json.loads(json_config_file.read())["other_parameters"]["max_temperature"]
             json_config_file.close()
         except IOError:
@@ -116,7 +116,7 @@ class usecase_1_temperature(object):
     def get_HTTP_parameters(self):
         # Load sensor data as HTTP parameters
         try:
-            json_config_file = open('usecase_1_temperature.json.json', 'r')
+            json_config_file = open('usecase_1_temperature_configuration.json.json', 'r')
             http_parameters = json.loads(json_config_file.read())["http_parameters"]
             json_config_file.close()
         except IOError:
