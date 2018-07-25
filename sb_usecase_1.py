@@ -1,5 +1,10 @@
-''' Implements use-case no. 1. This use-case is about keeping track of 
-    the temperature of the VR3 computer case. 
+''' Implements use-case no. USE CASE NO. This use-case is about 
+    DETAILS GO HERE. 
+
+
+
+    REMEMBER TO FILL OUT AND CHANGE ACCORDING TO USE CASE
+    REMEMBER TO CHANGE CLASS AND CONFIGURATION FILE NAME ACCORDING TO USE CASE!!
 '''
 
 from threading import Thread
@@ -32,7 +37,6 @@ class SB_Usecase_No1(object):
 
 
     def run(self):
-        print("Here I am: use-case no. 1")
 
         # Open up a connection and stream data from a DT cloud
         sse_client = SB_SSEClient()
@@ -43,11 +47,39 @@ class SB_Usecase_No1(object):
         producer_thread = threading.Thread(target=self.stream_data, args=(client, ))
         producer_thread.start()
 
-        #LOGIC GOES HERE
+        self.use_case_logic()
 
         producer_thread.join()
         
+    ''' CHANGE NAME ACCORDING TO USE CASE'''
+    def use_case_logic(self):
 
+        while True:
+            data_point = None
+            try:
+                data_point = self.queue.get()
+
+                # Use case logic goes here
+
+            except queue.Queue.Empty as e:
+                print("Queue is empty...")
+
+            ''' Break out of loop upon interrupt signal'''
+            if self.interrupted == True:
+                self.thread_kill = True
+                break
+
+    ''' Loads other_parameters from config file '''
+    def load_other_config_parameters(self):
+        try:
+            #change
+            json_config_file = open('sb_usecase_2_configuration.json', 'r')
+            #change
+            max_open_duration = json.loads(json_config_file.read())["other_parameters"]["max_open_duration"]
+            json_config_file.close()
+        except IOError:
+            print("Could not read or open config file. Exiting...")
+            sys.exit(1)
 
     ''' Listen for live sensor data and insert them into a FIFO queue '''
     def stream_data(self, client):
