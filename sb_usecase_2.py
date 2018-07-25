@@ -15,9 +15,9 @@ import queue
 import signal
 import time
 import datetime
-import parser
 
-class SB_Usecase_No1(object):
+
+class SB_Usecase_No2(object):
     def __init__(self):
 
         # Get HTTP parameters 
@@ -31,7 +31,6 @@ class SB_Usecase_No1(object):
         # Thread-safe FIFO queue
         self.queue = queue.Queue()
         self.run()
-
 
     def run(self):
 
@@ -47,7 +46,6 @@ class SB_Usecase_No1(object):
         # Perform use-case logic
         self.surveil_doorstate()
         producer_thread.join()
-        
 
     ''' Monitors state (open/closed) of a door (proximity sensor) '''
     def surveil_doorstate(self):
@@ -119,10 +117,6 @@ class SB_Usecase_No1(object):
                     print("Thread killed")
                     return
 
-
-
-
-
     ''' Returns the HTTP parameters used in streaming '''
     def get_HTTP_parameters(self):
         # Load sensor data as HTTP parameters
@@ -135,17 +129,10 @@ class SB_Usecase_No1(object):
             sys.exit(1)
 
         return http_parameters
-
-
-
-
     
     ''' Signal handler '''
     def signal_handler(self, signal, frame):
         self.interrupted = True
 
-
-
-
 if __name__ == '__main__':
-    uc_1 = SB_Usecase_No1()
+    uc_1 = SB_Usecase_No2()
