@@ -92,7 +92,7 @@ class usecase_2_proximity(object):
     def max_open_duration(self):
         # Load duration limit for an open door from config file
         try:
-            json_config_file = open('sb_usecase_2_configuration.json', 'r')
+            json_config_file = open('usecase_2_proximity_configuration.json', 'r')
             max_open_duration = json.loads(json_config_file.read())["other_parameters"]["max_open_duration"]
             json_config_file.close()
         except IOError:
@@ -122,7 +122,7 @@ class usecase_2_proximity(object):
     def get_HTTP_parameters(self):
         # Load sensor data as HTTP parameters
         try:
-            json_config_file = open('sb_usecase_2_configuration.json', 'r')
+            json_config_file = open('usecase_2_proximity_configuration.json', 'r')
             http_parameters = json.loads(json_config_file.read())["http_parameters"]
             json_config_file.close()
         except IOError:
