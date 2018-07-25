@@ -1,10 +1,10 @@
 ''' Implements use-case no. USE CASE NO. This use-case is about 
     DETAILS GO HERE. 
 
-
-
     REMEMBER TO FILL OUT AND CHANGE ACCORDING TO USE CASE
-    REMEMBER TO CHANGE CLASS AND CONFIGURATION FILE NAME ACCORDING TO USE CASE!!
+
+    REMEMBER TO CHANGE 1) CLASS NAME (AND MAIN FUNCTION), 2) .py FILE NAME, 
+    3) CONFIGURATION FILE NAME AND 4) CONFIG FILE PATH ACCORDING TO USE CASE!!
 '''
 
 from threading import Thread
@@ -20,7 +20,7 @@ import queue
 import signal
 
 
-class SB_Usecase_No1(object):
+class changeme_1_temperature(object):
     def __init__(self):
 
         # Get HTTP parameters 
@@ -73,9 +73,9 @@ class SB_Usecase_No1(object):
     def load_other_config_parameters(self):
         try:
             #change
-            json_config_file = open('sb_usecase_2_configuration.json', 'r')
+            json_config_file = open('CHANGE.ME.json', 'r')
             #change
-            max_open_duration = json.loads(json_config_file.read())["other_parameters"]["max_open_duration"]
+            max_open_duration = json.loads(json_config_file.read())["other_parameters"]["CHANGE_ME"]
             json_config_file.close()
         except IOError:
             print("Could not read or open config file. Exiting...")
@@ -104,7 +104,8 @@ class SB_Usecase_No1(object):
     def get_HTTP_parameters(self):
         # Load sensor data as HTTP parameters
         try:
-            json_config_file = open('sb_usecase_1_configuration.json', 'r')
+            #change
+            json_config_file = open('CHANGE.ME.json', 'r')
             http_parameters = json.loads(json_config_file.read())["http_parameters"]
             json_config_file.close()
         except IOError:
@@ -125,4 +126,4 @@ class SB_Usecase_No1(object):
 
 
 if __name__ == '__main__':
-    uc_1 = SB_Usecase_No1()
+    uc_1 = changeme_1_temperature()
