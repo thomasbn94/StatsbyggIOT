@@ -18,7 +18,7 @@ import time
 import datetime
 
 
-class SB_Usecase_No2(object):
+class usecase_2_proximity(object):
     def __init__(self):
 
         # Get HTTP parameters 
@@ -136,4 +136,4 @@ class SB_Usecase_No2(object):
         self.interrupted = True
 
 if __name__ == '__main__':
-    uc_1 = SB_Usecase_No2()
+    uc_1 = usecase_2_proximity()
