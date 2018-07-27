@@ -1,6 +1,6 @@
-''' Implements use-case no. 2. This use-case is about keeping track of 
-    the duration a specific door has been open 
-    (proximity sensor in the "NOT-PRESENT" state) 
+''' Implements use-case no. 2. This use-case send an alert if the
+    specified object (a notebook) has been removed from its docking-station
+    for longer than the allowed time (proximity sensor in the "NOT-PRESENT" state) 
 '''
 
 from threading import Thread
@@ -45,11 +45,11 @@ class usecase_2_proximity(object):
         producer_thread.start()
 
         # Perform use-case logic
-        self.surveil_doorstate()
+        self.surveil_sensorstate()
         producer_thread.join()
 
-    ''' Monitors state (open/closed) of a door (proximity sensor) '''
-    def surveil_doorstate(self):
+    ''' Monitors state of a proximity sensor '''
+    def surveil_sensorstate(self):
         
         while True:
             data_point = None
@@ -60,17 +60,20 @@ class usecase_2_proximity(object):
                 state = data_point['result']['event']['data']['objectPresent']['state']
                 time_of_state_change = data_point['result']['event']['data']['objectPresent']['updateTime']
 
+                #Remove superfluous data from time string and parse to datetime
+                time_of_state_change = datetime.datetime.strptime(time_of_state_change[:10] + " " + time_of_state_change[11:26], "%Y-%m-%d %H:%M:%S.%f")
+
                 max_duration = self.max_open_duration()
                 if state == "PRESENT":
-                    print("Door closed at %s" % (time_of_state_change))
+                    print("Notebook present at %s" % (time_of_state_change))
                 elif state == "NOT_PRESENT":
                     timer = 0
-                    print("Door opened at %s" % (time_of_state_change))
+                    print("Notebook removed at %s" % (time_of_state_change))
                     while state == "NOT_PRESENT" and self.queue.empty():
                         timer += 1
 
                         if timer > max_duration:
-                            alert = "ALERT: Door open since %s, alert issued at %s" %(time_of_state_change, datetime.datetime.utcnow())
+                            alert = "ALERT: Notebook gone since %s,\nalert issued at %s" %(time_of_state_change, datetime.datetime.utcnow())
                             self.print_alert(alert)
                             break
 
@@ -88,9 +91,9 @@ class usecase_2_proximity(object):
     def print_alert(self, alert):
         print(alert)
         
-    ''' Returns the max allowed duration for a door to remain open '''
+    ''' Returns the max allowed duration for a sensor to remain open '''
     def max_open_duration(self):
-        # Load duration limit for an open door from config file
+        # Load duration limit for an open state from config file
         try:
             json_config_file = open('usecase_2_proximity_configuration.json', 'r')
             max_open_duration = json.loads(json_config_file.read())["other_parameters"]["max_open_duration"]
