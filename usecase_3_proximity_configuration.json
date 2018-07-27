@@ -1,0 +1,18 @@
+{
+    "http_parameters": {
+        "device_types": "proximity",
+        "event_types": "objectPresent",
+        "device_ids": [
+            "bakijf57rihjn8rl22mg"
+        ]
+    },
+    "allowed_time_interval": {
+        "days": [
+           1, 2, 3, 4, 5
+        ],
+        "hours": {
+            "open": 7,
+            "close": 17
+        }
+    }
+}
