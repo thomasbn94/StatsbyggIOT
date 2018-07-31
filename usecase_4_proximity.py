@@ -16,6 +16,7 @@ import queue
 import signal
 import time
 import datetime
+import pytz
 
 
 class usecase_4_proximity(object):
@@ -64,6 +65,10 @@ class usecase_4_proximity(object):
 
                 #Remove superfluous data from time string and parse to datetime
                 time_of_state_change = datetime.datetime.strptime(time_of_state_change[:10] + " " + time_of_state_change[11:26], "%Y-%m-%d %H:%M:%S.%f")
+
+                #Convert to current timezone for Oslo
+                time_of_state_change = time_of_state_change.replace(tzinfo=pytz.utc).astimezone(pytz.timezone("Europe/Oslo"))
+                print(time_of_state_change)
                 
                 if state == "PRESENT":
                     print("Door closed at %s" % (time_of_state_change))
