@@ -79,7 +79,9 @@ class usecase_4_proximity(object):
                         while state == "NOT_PRESENT" and self.queue.empty():
                             timer += 1
                             if timer > max_open_duration:
-                                alert = "ALERT: Door open since since %s,\nalert issued at %s" %(time_of_state_change, datetime.datetime.utcnow())
+                                time_now = datetime.datetime.utcnow()
+                                time_now = time_now.replace(tzinfo=pytz.utc).astimezone(pytz.timezone("Europe/Oslo"))
+                                alert = "ALERT: Door open since since %s,\nalert issued at %s" %(time_of_state_change, time_now)
                                 self.print_alert(alert)
                                 break
 
