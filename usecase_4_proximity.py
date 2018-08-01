@@ -68,7 +68,6 @@ class usecase_4_proximity(object):
 
                 #Convert to current timezone for Oslo
                 time_of_state_change = time_of_state_change.replace(tzinfo=pytz.utc).astimezone(pytz.timezone("Europe/Oslo"))
-                print(time_of_state_change)
                 
                 if state == "PRESENT":
                     print("Door closed at %s" % (time_of_state_change))
