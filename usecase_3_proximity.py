@@ -91,10 +91,10 @@ class usecase_3_proximity(object):
     ''' Loads scheduled opening hours from config file '''
     def load_other_config_parameters(self):
         try:
-            json_config_file = open('usecase_3_proximity_configuration.json', 'r')
+            json_config_file = open('configuration/usecase_3_proximity_configuration.json', 'r')
             allowed_days = json.loads(json_config_file.read())["allowed_time_interval"]['days']
             json_config_file.close()
-            json_config_file = open('usecase_3_proximity_configuration.json', 'r')
+            json_config_file = open('configuration/usecase_3_proximity_configuration.json', 'r')
             allowed_hours = json.loads(json_config_file.read())["allowed_time_interval"]['hours']
             json_config_file.close()
         except IOError:
