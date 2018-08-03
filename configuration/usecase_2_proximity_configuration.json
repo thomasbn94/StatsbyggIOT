@@ -1,0 +1,12 @@
+{
+    "http_parameters": {
+        "device_types": "proximity",
+        "event_types": "objectPresent",
+        "device_ids": [
+            "bakijdl7rihjn8rl1jo0"
+        ]
+    },
+    "other_parameters": {
+        "max_open_duration": 10
+    }
+}
