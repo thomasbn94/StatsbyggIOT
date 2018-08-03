@@ -115,13 +115,13 @@ class usecase_4_proximity(object):
     def load_other_config_parameters(self):
         # Load duration limit for an open state from config file
         try:
-            json_config_file = open('usecase_4_proximity_configuration.json', 'r')
+            json_config_file = open('configuration/usecase_4_proximity_configuration.json', 'r')
             max_open_duration = json.loads(json_config_file.read())["other_parameters"]["max_open_duration"]
             json_config_file.close()
-            json_config_file = open('usecase_4_proximity_configuration.json', 'r')
+            json_config_file = open('configuration/usecase_4_proximity_configuration.json', 'r')
             allowed_days = json.loads(json_config_file.read())["allowed_time_interval"]['days']
             json_config_file.close()
-            json_config_file = open('usecase_4_proximity_configuration.json', 'r')
+            json_config_file = open('configuration/usecase_4_proximity_configuration.json', 'r')
             allowed_hours = json.loads(json_config_file.read())["allowed_time_interval"]['hours']
             json_config_file.close()
         except IOError:
@@ -151,7 +151,7 @@ class usecase_4_proximity(object):
     def get_HTTP_parameters(self):
         # Load sensor data as HTTP parameters
         try:
-            json_config_file = open('usecase_4_proximity_configuration.json', 'r')
+            json_config_file = open('configuration/usecase_4_proximity_configuration.json', 'r')
             http_parameters = json.loads(json_config_file.read())["http_parameters"]
             json_config_file.close()
         except IOError:
