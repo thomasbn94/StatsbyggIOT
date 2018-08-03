@@ -101,7 +101,7 @@ class usecase_1_temperature(object):
     def get_max_temperature(self):
         # Load temperature from config file
         try:
-            json_config_file = open('usecase_1_temperature_configuration.json', 'r')
+            json_config_file = open('configuration/usecase_1_temperature_configuration.json', 'r')
             max_temp = json.loads(json_config_file.read())["other_parameters"]["max_temperature"]
             json_config_file.close()
         except IOError:
