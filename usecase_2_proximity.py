@@ -125,7 +125,7 @@ class usecase_2_proximity(object):
     def get_HTTP_parameters(self):
         # Load sensor data as HTTP parameters
         try:
-            json_config_file = open('usecase_2_proximity_configuration.json', 'r')
+            json_config_file = open('configuration/usecase_2_proximity_configuration.json', 'r')
             http_parameters = json.loads(json_config_file.read())["http_parameters"]
             json_config_file.close()
         except IOError:

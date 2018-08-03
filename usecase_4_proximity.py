@@ -115,11 +115,7 @@ class usecase_4_proximity(object):
     def load_other_config_parameters(self):
         # Load duration limit for an open state from config file
         try:
-<<<<<<< HEAD:usecase_2_proximity.py
-            json_config_file = open('configration/usecase_2_proximity_configuration.json', 'r')
-=======
             json_config_file = open('configuration/usecase_4_proximity_configuration.json', 'r')
->>>>>>> usecase_4_proximity:usecase_4_proximity.py
             max_open_duration = json.loads(json_config_file.read())["other_parameters"]["max_open_duration"]
             json_config_file.close()
             json_config_file = open('configuration/usecase_4_proximity_configuration.json', 'r')
