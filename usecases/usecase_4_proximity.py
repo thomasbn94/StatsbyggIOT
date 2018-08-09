@@ -4,7 +4,7 @@
 '''
 
 from threading import Thread
-from sb_sseStream import SB_SSEClient
+from lib.sb_sseStream import SB_SSEClient
 import requests
 import json
 import pprint

@@ -13,8 +13,6 @@ class Fetch_data(object):
 
         # Get JSON configuration
         self.json_config = self.get_configurations()
-        #print(self.json_config)
-        
         self.run()
 
 
@@ -37,8 +35,9 @@ class Fetch_data(object):
             self.generate_query(sensor_data, file)
             file.close()            
 
-            print(file_name)
+            print("Generated " + file_name)
         
+        print("Done. Check \'big queries\' folder")
 
     ''' Print SQL query to 'file '''
     def generate_query(self, sensor_data, file):
