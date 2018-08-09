@@ -14,3 +14,6 @@ The Azure function inserts only temperature values. The code works like a guide 
 
 ## Query function ##
 The query generator is not entierly complete. DT API claims that a call to `/projects/{project}/devices/{device}/events` will return a `next_page_token` together with the sensor data. When developing the `query generator/sb_query_generator.py`, `next_page_token` was not present in the JSON response. Because of this, the response from DT only contains at most 1000 data points per sensor. The earilest data point is 22th of July. We know for certainty that there are data points registered prior to this date. Please refer to `query generator/data_fetch_config.json` to adjust the parameters. 
+
+## JSON configuration files ##
+Common for all JSON files is that you need to add key-value pairs for adjusting the behaviour of the scripts in the `usecases` directory. Refer to the DT documentation for parameters passed in HTTP requests, as they should be specified in JSON files and not in-line in the code. 
