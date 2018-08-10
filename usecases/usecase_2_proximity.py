@@ -16,7 +16,7 @@ import queue
 import signal
 import time
 import datetime
-
+import os
 
 class usecase_2_proximity(object):
     def __init__(self):
@@ -95,7 +95,8 @@ class usecase_2_proximity(object):
     def max_open_duration(self):
         # Load duration limit for an open state from config file
         try:
-            json_config_file = open('configration/usecase_2_proximity_configuration.json', 'r')
+            path = os.path.join("configuration", "usecase_2_proximity_configuration.json")
+            json_config_file = open(path, 'r')
             max_open_duration = json.loads(json_config_file.read())["other_parameters"]["max_open_duration"]
             json_config_file.close()
         except IOError:
