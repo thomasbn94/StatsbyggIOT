@@ -6,8 +6,6 @@ Each use-case uses `sb_sseStream.py` to stream live sensor data from the edge. A
 
 Secrets are not included in the project. Please refer to the project owner for secrets. 
 
-There are a few notes about the components in this project that need to be clarified.
-
 ## Azure function ##
 
 The Azure function inserts only temperature values. The code works like a guide to process other types of sensor data as well. Simply add another `case` under `switch (eventType)` and implement the rest of the functionality. The function hibernates after a few minutes. This is due to the pricing plan in Microsoft Azure. After some research, we believe someone with elevated permissions needs to change the pricing plan to `dedicated App Service Plan`. However, due to limited access, we are not absolutely sure this is the problem.
