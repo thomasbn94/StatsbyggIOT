@@ -1,0 +1,18 @@
+{
+    "event_types": "temperature",
+    "device_ids": [
+        "b6sfpsl7rihg0dm4uuf0",
+        "bakijf57rihjn8rl21d0",
+        "bakijfl7rihjn8rl2540",
+        "bakijft7rihjn8rl28h0"
+    ],
+    "page_token": "",
+    "start_time": "2018-06-01T00:00:00Z",
+    "project_id": "babtu2hdq5fg00b19d70",
+    "sensors": {
+        "b6sfpsl7rihg0dm4uuf0": "7.7235.temp.VR3GPU.bs1",
+        "bakijf57rihjn8rl21d0": "7.temp.bskap",
+        "bakijfl7rihjn8rl2540": "7.temp.kskap",
+        "bakijft7rihjn8rl28h0": "7.temp.serverrom"
+    }
+}   

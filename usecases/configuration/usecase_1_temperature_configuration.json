@@ -1,0 +1,12 @@
+{
+    "http_parameters": {
+        "device_types": "temperature",
+        "event_types": "temperature",
+        "device_ids": [
+            "bakijfd7rihjn8rl23k0"
+        ]
+    },
+    "other_parameters": {
+        "max_temperature": 10
+    }
+}

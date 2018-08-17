@@ -1,0 +1,7 @@
+.vscode/
+__pycache__/
+experiments/
+big queries/
+
+credentials.py
+auth.py
