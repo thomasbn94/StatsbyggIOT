@@ -17,6 +17,8 @@ import signal
 import time
 import datetime
 import pytz
+import os
+
 
 
 class usecase_4_proximity(object):

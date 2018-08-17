@@ -15,6 +15,7 @@ import threading
 import queue
 import signal
 import datetime
+import os
 
 
 class usecase_3_proximity(object):
@@ -125,7 +126,6 @@ class usecase_3_proximity(object):
     def get_HTTP_parameters(self):
         # Load sensor data as HTTP parameters
         try:
-            #change
             json_config_file = open(os.path.dirname(__file__) + '\\configuration\\usecase_3_proximity_configuration.json', 'r')
             http_parameters = json.loads(json_config_file.read())["http_parameters"]
             json_config_file.close()
